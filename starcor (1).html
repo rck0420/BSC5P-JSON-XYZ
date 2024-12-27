@@ -1,0 +1,439 @@
+<html>
+<head>
+    <base href="https://example.com/home">
+    <title>starcor - Connecting you to the cosmos</title>
+    <style>
+        /* Reset and basic styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .menu-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            fill: #fff;
+            transition: fill 0.3s ease;
+        }
+
+        .menu-icon:hover {
+            fill: #00ffff;
+        }
+
+        .menu-links {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: rgba(10, 10, 10, 0.9);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .menu-links a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-links a:hover {
+            background-color: #00ffff;
+            color: #000;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: rgba(10, 10, 10, 0.9);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            background-image: url('/Screenshot_20241220_033555_Brave.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .company-name {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            animation: glow 1.5s infinite alternate;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ffff; }
+            to { text-shadow: 0 0 20px #ffffff; }
+        }
+
+        .slogan {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-style: italic;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Description Section */
+        .description {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: rgba(10, 10, 10, 0.9);
+        }
+
+        .description h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .description p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+            color: #ddd;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+                flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background-color: #00ffff;
+            color: #000;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .cta-button:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* Footer Links */
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #00ffff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .company-name {
+                font-size: 2.5rem;
+            }
+            .slogan {
+                font-size: 1rem;
+            }
+            .description h2 {
+                font-size: 2rem;
+            }
+            .description p {
+                font-size: 1rem;
+            }
+            .menu-links {
+                top: 35px;
+            }
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Star Picker Modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            padding-top: 100px; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.9); 
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 700px;
+            background-color: rgba(10, 10, 10, 0.95);
+            border-radius: 10px;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: #fff;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .star-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .star {
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            transition: transform 0.3s ease, fill 0.3s ease;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+            fill: #00ffff;
+        }
+
+        .selected-star {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav>
+        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" onclick="toggleMenu()">
+            <rect width="30" height="4"></rect>
+            <rect y="13" width="30" height="4"></rect>
+            <rect y="26" width="30" height="4"></rect>
+        </svg>
+        <div class="menu-links" id="menuLinks">
+            <a href="https://example.com/home">Home</a>
+            <a href="https://example.com/about">About</a>
+            <a href="https://example.com/support">Support</a>
+            <div class="dropdown">
+                <a href="https://example.com/quick-links">More</a>
+                <div class="dropdown-content">
+                    <a href="https://example.com/faq">FAQ</a>
+                    <a href="https://example.com/blog">Blog</a>
+                    <a href="https://example.com/careers">Careers</a>
+                    <a href="https://example.com/resources">Resources</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="company-name">starcor</div>
+        <img src="/Screenshot_20241220_033555_Brave.jpg" alt="Stellar Cluster" style="width: 80%; max-width: 600px; margin-top: 30px; border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 20px #00ffff;">
+        <div class="slogan">(Connecting you to the cosmos)</div>
+    </div>
+
+    <!-- Description Section -->
+    <div class="description">
+        <h2>Making a Personal Connection to the Cosmos</h2>
+        <p>
+            Welcome to starcor, your gateway to making a personal connection to the cosmos. Purchase the right Ascension and declination coordinates of real stars and establish a lasting connection with the universe. Our platform allows you to locate your star with our intuitive sky map application and receive an official, personalized certificate as a testament to your celestial bond. Whether as a heartfelt gift or a personal milestone, starcor brings the cosmos closer to you with kindness and love.
+        </p>
+        <div class="cta-buttons">
+            <a href="https://example.com/pick-star-choice" class="cta-button">Pick a Star Choice</a>
+            <a href="https://example.com/purchase" class="cta-button">Purchase Your Star</a>
+            <a href="https://example.com/sky-map" class="cta-button">View Sky Map</a>
+            <a href="https://example.com/support" class="cta-button">Get Support</a>
+        </div>
+    </div>
+
+    <!-- Star Picker Modal -->
+    <div id="starPickerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeStarPicker()">&times;</span>
+            <h2>Select Your Star</h2>
+            <div class="star-grid">
+                <!-- Example SVG Stars -->
+                <svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" onclick="selectStar(this)">
+                    <polygon points="32 4 39.09 24.26 60 24.26 42 38.74 49.09 59 32 44.52 14.91 59 22 38.74 4 24.26 24.91 24.26 32 4" fill="#fff"/>
+                </svg>
+                <svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" onclick="selectStar(this)">
+                    <polygon points="32 4 39.09 24.26 60 24.26 42 38.74 49.09 59 32 44.52 14.91 59 22 38.74 4 24.26 24.91 24.26 32 4" fill="#fff"/>
+                </svg>
+                <svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" onclick="selectStar(this)">
+                    <polygon points="32 4 39.09 24.26 60 24.26 42 38.74 49.09 59 32 44.52 14.91 59 22 38.74 4 24.26 24.91 24.26 32 4" fill="#fff"/>
+                </svg>
+                <!-- Add more stars as needed -->
+            </div>
+            <button onclick="confirmStar()" class="cta-button" style="margin-top: 20px;">Confirm Selection</button>
+        </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="footer">
+        <a href="https://example.com/privacy">Privacy Policy</a>
+        <a href="https://example.com/terms">Terms of Service</a>
+        <a href="https://example.com/contact">Contact</a>
+    </div>
+
+    <!-- JavaScript for Menu Toggle and Star Picker -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menuLinks');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+
+        // Close the menu when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.closest('.menu-icon') && !event.target.closest('.menu-links')) {
+                const menu = document.getElementById('menuLinks');
+                if (menu.style.display === 'block') {
+                    menu.style.display = 'none';
+                }
+            }
+        }
+
+        // Star Picker Functions
+        function openStarPicker() {
+            const modal = document.getElementById('starPickerModal');
+            modal.style.display = 'block';
+        }
+
+        function closeStarPicker() {
+            const modal = document.getElementById('starPickerModal');
+            modal.style.display = 'none';
+        }
+
+        let selectedStar = null;
+
+        function selectStar(starElement) {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.classList.remove('selected-star');
+            });
+            starElement.classList.add('selected-star');
+            selectedStar = starElement;
+        }
+
+        function confirmStar() {
+            if (selectedStar) {
+                alert('Star selected successfully!');
+                // Incorporate attached code functionality here
+                closeStarPicker();
+            } else {
+                alert('Please select a star before confirming.');
+            }
+        }
+
+        // Modify the Pick a Star Choice button to open the modal
+        document.querySelector('.cta-button[href="https://example.com/pick-star-choice"]').addEventListener('click', function(event) {
+            event.preventDefault();
+            openStarPicker();
+        });
+    </script>
+</body>
+</html>
